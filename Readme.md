@@ -1,40 +1,30 @@
-# FineOps – Cloud Cost Optimization & DevOps Engineering
+FineOps – Cutting Cloud Waste, the Practical Way
 
-Welcome to **FineOps** — a lightweight consultancy helping startups and engineering teams save money, scale infrastructure, and improve cloud performance.
+Hi there — we're FineOps, a small team that helps startups and dev teams spend less on AWS and make their systems run smoother. No fluff, just sharp technical fixes and real savings.
 
-We specialize in:
-- 💸 AWS Cost Optimization (up to $30,000/month saved)
-- ⚙️ Infrastructure Automation (Terraform, ArgoCD, GitOps)
-- 🐳 Kubernetes CI/CD Pipelines (Jenkins, GitHub Actions)
-- ☁️ Secure Cloud Architecture (VPC, PrivateLink, Graviton)
+We’ve helped companies:
 
----
+🧾 Knock $30K/month off AWS bills
+🔧 Automate infra using tools like Terraform & ArgoCD
+🐳 Improve CI/CD with Kubernetes and GitHub Actions
+🔒 Lock down cloud setups with VPCs, PrivateLink, and more
+🛠 Real Work We've Done
 
-## 👇 Explore Our Real Projects
+Project	What It Was About
+Graviton Cost Savings	Moved workloads to Graviton – no downtime, major savings
+EBS Volume Optimization	Tuned EBS setup to cut storage costs smartly
+Jenkins CI Cost Cut	Cleaned up pipelines and saved money in the process
+Terraform Cost Audit Module	Made a module to catch AWS waste early
+📚 Stuff We've Written
 
-| Project | Description |
-|--------|-------------|
-| [Graviton Cost Savings](./graviton-cost-savings) | Migrated workloads to AWS Graviton with zero downtime and large savings |
-| [EBS Volume Optimization](./eks-ebs-optimizer) | Reduced storage costs by tuning EBS types and usage |
-| [Jenkins CI Cost Cut](./jenkins-ci-cost-cut) | Scaled down and optimized Jenkins pipelines for performance + cost |
-| [Terraform Cost Audit Module](./terraform-cost-audit-module) | Reusable Infra module to analyze AWS spend vs usage |
+Some guides and notes you might find useful — all in /articles/:
 
----
+AWS: Where the Money Goes
+Moving to Graviton Without Screwing Up
+Rolling Out Kubernetes Updates Without Downtime
+👋 Want to Chat?
 
-## 📖 Articles & Guides
+We’re open to new projects — remote, async, and focused on results. If your AWS bill is getting out of hand, we might be able to help.
 
-Read our deep-dives inside `/articles/`:
+→ Book a quick call
 
-- [AWS Cost Optimization Fundamentals](./articles/aws-cost-optimization-principles.md)
-- [How to Migrate to Graviton Smoothly](./articles/migrate-to-graviton-guide.md)
-- [Zero-Downtime Deployments in Kubernetes](./articles/kubernetes-rolling-updates-for-zero-downtime.md)
-
----
-
-## 📞 Work With Us
-
-FineOps offers high-impact DevOps & Cloud Optimization consulting — async, remote, and results-driven.
-
-➡️ [Book a Free Discovery Call](https://cal.com/fineops-demo)
-
----
