@@ -1,60 +1,72 @@
-# Jenkins Autoscaling: Cutting CI Costs Without Slowing Down
+# Jenkins Autoscaling – Cutting CI Costs Without Slowing Everything Down
 
-This **case study** dives into how we used a mix of automation, spot instances, and GitOps to dramatically cut Jenkins build costs — without sacrificing speed or reliability. It’s part of the [FineOps](../README.md) toolkit for **cloud cost optimization**, and it's especially relevant for teams exploring **DevOps-as-a-service** or looking to bring in **contract DevOps engineers** for quick wins.
+Okay, quick story.
 
----
+We were working with a team that had a super spiky Jenkins workload — think 2 jobs at 11AM, 30+ by 4PM, and then nothing overnight. Problem was, their nodes were always "on", even when Jenkins was twiddling its thumbs.
 
-## ⚠️ The Problem
+So yeah... compute bills were bad. Also, scaling was completely manual. No one wants to SSH into the Jenkins controller just to spin up agents in 2025.
 
-Our client — a fast-moving product team — was dealing with:
-
-- **Spiky build traffic**: Some hours had 1–2 jobs, others had 30+. But compute stayed running regardless.
-- **Manual node scaling**: Jenkins admins had to log in, scale up agents manually, and pray things didn't break.
-- **Wasted compute hours**: On-demand EC2 nodes were chewing through the budget even when idle.
-
-As a **DevOps services company**, we needed to fix this with something scalable, cost-efficient, and maintainable — fast.
+We decided to fix it. Here’s what we built — part of our [FineOps](../README.md) cloud savings kit, and helpful if you’re running builds in AWS and don’t want to cry every time the invoice hits your inbox.
 
 ---
 
-## 🔧 What We Built
+## What was wrong?
 
-We implemented a clean, modular autoscaling setup using well-tested DevOps tools:
+- Jenkins agents were just... always there. Even when idle.  
+- Admins were manually tweaking nodes — not fun, not fast.  
+- Builds queued up during peak hours, eating up delivery timelines.  
+- Company was growing and couldn't keep this up manually.
 
-1. **Autoscaled Jenkins agents with AWS Spot Instances**  
-   - Cheap, flexible, and ideal for ephemeral workloads  
-   - Built in preemptible fallback logic so builds wouldn’t randomly fail
-
-2. **Integrated Prometheus metrics and dashboards**  
-   - Gave visibility into job queue length, node usage, and preemption rates  
-   - Allowed quick detection of scaling bottlenecks
-
-3. **Provisioned everything via Terraform + GitOps**  
-   - Infra-as-code made environments reproducible  
-   - GitOps workflows kept infra changes auditable and reviewable
+We’re a **DevOps shop**, so this kind of thing is kinda our jam.
 
 ---
 
-## 📈 The Outcome
+## What we actually did
 
-- **✅ 45% lower monthly CI costs**  
-  Switching to spot agents and killing idle nodes did the heavy lifting here.
+### 1. Spot Instances = Cheap + Fast (when they work)
 
-- **🚀 Faster job turnaround times**  
-  Auto-provisioning meant we scaled *just in time* as builds came in — no more waiting in queue.
+We used **AWS spot instances** to scale Jenkins build agents. They spin up fast, cost a fraction of normal EC2, and honestly are perfect for short-lived jobs.
 
-- **📦 Reusable blueprint**  
-  The full setup (with Terraform modules, spot instance config, and Jenkins integration) is documented in [Jenkins CI Cost Cut](../jenkins-ci-cost-cut/README.md).
+Yes, they get killed sometimes, but Jenkins doesn't care as long as we had enough spares in the pool.  
+
+### 2. Metrics (because vibes aren’t a monitoring strategy)
+
+Hooked up **Prometheus** to track:
+
+- Queue depth
+- Spot usage
+- How often AWS killed our agents mid-build (spoiler: not that often)
+
+Gave us a real sense of how scaling behaved under pressure.
+
+### 3. Terraform + GitOps = sanity
+
+Infra was defined using our own Terraform modules. GitOps pipelines made sure changes were versioned and reviewable. We didn’t want a "clickops" nightmare later.
 
 ---
 
-## 🛠 Want to Do the Same?
+## What changed?
 
-For teams looking to audit or improve their AWS spend, we’ve open-sourced patterns like the [Terraform Cost Audit Module](../terraform-cost-audit-module/README.md). It’s a good starting point for identifying over-provisioned resources.
+- 💸 **CI costs dropped ~45%**  
+  Mostly thanks to using spots + auto-killing idle agents.
+
+- ⚡ **Jenkins got way faster**  
+  New agents spun up just in time. Job queue length went way down.
+
+- 📁 **We built a reusable setup**  
+  You can check it out in [Jenkins CI Cost Cut](../jenkins-ci-cost-cut/README.md). Reuse or fork it if you want.
 
 ---
 
-## 🤝 Need Hands-On Help?
+## Want to copy this?
 
-Whether you’re looking for **short-term DevOps help**, or want a full-blown **cloud cost optimization review**, we’ve got you.
+We also put together a [Terraform Cost Audit Module](../terraform-cost-audit-module/README.md) if you want to catch other over-provisioned junk in your infra.
 
-👉 [Book a Free Consult](https://cal.com/fineops-demo)
+---
+
+## Need help?
+
+If you're stuck, or just want a second set of eyes —  
+We do **DevOps sprints**, **cloud audits**, or full-on **infra builds**. No fluff.
+
+📅 [Book a free consult](https://cal.com/fineops-demo) — no pressure.
